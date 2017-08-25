@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import InboxPage from './components/InboxPage';
 
-let selectedMessageIds = [3, 5];
+let selectedMessageIds = [2, 4];
 let messages = [
   {
     id: 1,

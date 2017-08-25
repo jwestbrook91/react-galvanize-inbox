@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function InboxPageLayout(props) {
-  console.log(props.children);
   return (
     <div className="InboxPageLayout">
       {props.children[0]}
