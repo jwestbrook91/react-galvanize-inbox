@@ -47,7 +47,7 @@ export default function MessageComponent({ message }) {
             {label}
           </span>
         )}
-        <a href="#">
+        <a href="a">
           {message.subject}
         </a>
       </div>
