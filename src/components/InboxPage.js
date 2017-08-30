@@ -6,14 +6,14 @@ import ComposeFormComponent from './ComposeFormComponent';
 
 export default function InboxPage({
   messages,
-  selected,
+  selectedMessageIds,
   onMarkAsReadMessage,
   onStarMessage,
   onUnstarMessage,
   onSelectMessage,
   onDeselectMessage,
   onOpenComposeForm,
-  composeOpen,
+  showComposeForm,
   onSelectAllMessages,
   onDeselectAllMessages,
   onMarkAsReadSelectedMessages,
@@ -30,7 +30,7 @@ export default function InboxPage({
       <InboxPageLayout>
         <ToolbarComponent
           messages={messages}
-          selectedMessageCount={selectedMessageCount}
+          selectedMessageCount={selectedMessageIds.length}
           onOpenComposeForm={onOpenComposeForm}
           onSelectAllMessages={onSelectAllMessages}
           onDeselectAllMessages={onDeselectAllMessages}
@@ -40,10 +40,10 @@ export default function InboxPage({
           onRemoveLabelSelectedMessages={onRemoveLabelSelectedMessages}
           onDeleteSelectedMessages={onDeleteSelectedMessages}
         />
-        {composeOpen ? <ComposeFormComponent onSubmit={onSubmit} onCancel={onCancel} /> : null}
+        {showComposeForm && <ComposeFormComponent onSubmit={onSubmit} onCancel={onCancel} />}
         <MessagesComponent
           messages={messages}
-          selectedMessageIds={selected}
+          selectedMessageIds={selectedMessageIds}
           onMarkAsReadMessage={onMarkAsReadMessage}
           onStarMessage={onStarMessage}
           onUnstarMessage={onUnstarMessage}

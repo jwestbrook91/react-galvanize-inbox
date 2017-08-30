@@ -62,7 +62,7 @@ let messages = [
   }
 ];
 
-let composeOpen = 0;
+let showComposeForm = undefined;
 let selectedMessageIds = [];
 let selectedMessageCount = 0;
 
@@ -91,7 +91,7 @@ function onSelectMessage(messageId) {
 }
 
 function onDeselectMessage(messageId) {
-  let removed = selected.indexOf(messageId);
+  let removed = selectedMessageIds.indexOf(messageId);
   selectedMessageIds.splice(removed, 1);
   selectedMessageCount = selectedMessageIds.length;
   render();
@@ -110,13 +110,13 @@ function onDeselectAllMessages() {
 }
 
 function onOpenComposeForm() {
-  composeOpen = 1;
+  showComposeForm = true;
   render();
 }
 
 function onMarkAsReadSelectedMessages() {
   if (selectedMessageIds.length > 0) {
-    selectedMessages = messages.filter(message => selectedMessageIds.includes(message.id));
+    let selectedMessages = messages.filter(message => selectedMessageIds.includes(message.id));
     selectedMessages.forEach(message => message.read == true);
   }
   render();
@@ -124,19 +124,71 @@ function onMarkAsReadSelectedMessages() {
 
 function onMarkAsUnreadSelectedMessages() {
   if (selectedMessageIds.length > 0) {
-    selectedMessages = messages.filter(message => selectedMessageIds.includes(message.id));
+    let selectedMessages = messages.filter(message => selectedMessageIds.includes(message.id));
     selectedMessages.forEach(message => message.read == false);
   }
   render();
 }
 
+function onApplyLabelSelectedMessages(label) {
+  messages.forEach(message => {
+    if (selectedMessageIds.includes(message.id) && !message.labels.includes(label)) {
+      message.labels.push(label);
+    }
+  });
+  render();
+}
+
+function onRemoveLabelSelectedMessages(label) {
+  messages.forEach(message => {
+    if (selectedMessageIds.includes(message.id)) {
+      message.labels.forEach(l => {
+        if (label === l) {
+          message.labels.splice(message.labels.indexOf(label), 1);
+        }
+      });
+    }
+  });
+  render();
+}
+
+function onDeleteSelectedMessages() {
+  messages.forEach(message => {
+    if (selectedMessageIds.includes(message.id)) {
+      messages.splice(messages.indexOf(), 1);
+    }
+  });
+  render();
+}
+
+function onSubmit(subject, body) {
+  let newMessage = {
+    id: 0,
+    subject: 'str',
+    read: false,
+    starred: false,
+    labels: [],
+    body: ''
+  };
+  newMessage.id = messages[messages.length - 1].id + 1;
+  newMessage.subject = subject;
+  newMessage.body = body;
+  messages.push(newMessage);
+  showComposeForm = false;
+  render();
+}
+
+function onCancel() {
+  showComposeForm = false;
+  render();
+}
 render();
 function render() {
   ReactDOM.render(
     <InboxPage
       messages={messages}
-      selected={selected}
-      composeOpen={composeOpen}
+      selectedMessageIds={selectedMessageIds}
+      showComposeForm={showComposeForm}
       onMarkAsReadMessage={onMarkAsReadMessage}
       onStarMessage={onStarMessage}
       onUnstarMessage={onUnstarMessage}
@@ -156,5 +208,4 @@ function render() {
     />,
     document.getElementById('root')
   );
-  registerServiceWorker();
 }

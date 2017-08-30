@@ -22,7 +22,6 @@ export default class MessageComponent extends React.Component {
   };
 
   handleSelectClick = event => {
-    event.preventDefault();
     if (this.props.selectedMessageIds.includes(this.props.message.id)) {
       this.props.onDeselectMessage(this.props.message.id);
     } else {
