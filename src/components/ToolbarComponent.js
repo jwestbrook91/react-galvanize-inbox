@@ -88,16 +88,16 @@ export default function ToolbarComponent({
 
         <select className="form-control label-select" disabled={`${disabled}`} onChange={handleOnApplyLabelSelectedMessages}>
           <option>Apply label</option>
-          <option value="dev">dev</option>
+          <option value="spam">dev</option>
           <option value="personal">personal</option>
-          <option value="gschool">gschool</option>
+          <option value="dev">gschool</option>
         </select>
 
         <select className="form-control label-select" disabled={`${disabled}`} onChange={handleAllRemoveLabel}>
           <option>Remove label</option>
-          <option value="dev">dev</option>
+          <option value="spam">dev</option>
           <option value="personal">personal</option>
-          <option value="gschool">gschool</option>
+          <option value="dev">gschool</option>
         </select>
 
         <button className="btn btn-default" disabled={`${disabled}`} onClick={handleDeleteSelected}>

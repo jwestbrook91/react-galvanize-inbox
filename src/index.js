@@ -9,7 +9,7 @@ let messages = [
     subject: 'Nigerian Prince, will pay many monies to you if helping',
     read: false,
     starred: false,
-    labels: [],
+    labels: ['spam'],
     body: 'I am nigerian prince. Please to give me your bank account info.'
   },
   {
@@ -17,7 +17,7 @@ let messages = [
     subject: 'Viagra!!!!',
     read: false,
     starred: true,
-    labels: ['dev'],
+    labels: ['spam', 'personal'],
     body: 'Spam. Totally spam'
   },
   {
@@ -33,7 +33,7 @@ let messages = [
     subject: 'Personal trainers hate him',
     read: false,
     starred: false,
-    labels: ['personal'],
+    labels: [],
     body: 'Hint: He takes steroids'
   },
   {
@@ -41,7 +41,7 @@ let messages = [
     subject: 'Son, please answer my phone calls',
     read: true,
     starred: true,
-    labels: [],
+    labels: ['personal'],
     body: 'You are making your mother sad :('
   },
   {
@@ -49,7 +49,7 @@ let messages = [
     subject: 'Just Pho You: Where to Eat SF’s Best Pho',
     read: true,
     starred: false,
-    labels: ['dev', 'personal'],
+    labels: [],
     body: 'Great restaurants near you'
   },
   {
@@ -57,7 +57,7 @@ let messages = [
     subject: 'Regarding your recent purchase of hair loss cream...',
     read: true,
     starred: true,
-    labels: [],
+    labels: ['personal'],
     body: 'hah! You bald sucker!'
   }
 ];
@@ -124,10 +124,11 @@ function onMarkAsReadSelectedMessages() {
 }
 
 function onMarkAsUnreadSelectedMessages() {
-  if (selectedMessageIds.length > 0) {
-    let selectedMessages = messages.filter(message => selectedMessageIds.includes(message.id));
-    selectedMessages.forEach(message => message.read === false);
-  }
+  messages.forEach(message => {
+    if (selectedMessageIds.includes(message.id)) {
+      message.read = false;
+    }
+  });
   render();
 }
 
