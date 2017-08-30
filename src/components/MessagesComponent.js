@@ -30,5 +30,3 @@ export default function MessagesComponent({
     </div>
   );
 }
-
-//message.selected will eventually break and needs a refactor
