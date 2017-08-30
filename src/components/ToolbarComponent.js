@@ -45,10 +45,19 @@ export default function ToolbarComponent({
     if (selectedMessageCount > 0) onMarkAsUnreadSelectedMessages();
   }
   function handleOnApplyLabelSelectedMessages(event) {
-    if (selectedMessageCount > 0) onApplyLabelSelectedMessages(event.target.value);
+    if (selectedMessageCount > 0) {
+      onApplyLabelSelectedMessages(event.target.value);
+    } else if (event.target.value === 'Apply label') {
+      return;
+    }
   }
+
   function handleAllRemoveLabel(event) {
-    if (selectedMessageCount > 0) onRemoveLabelSelectedMessages(event.target.value);
+    if (selectedMessageCount > 0) {
+      onRemoveLabelSelectedMessages(event.target.value);
+    } else if (event.target.value === 'Remove label') {
+      return;
+    }
   }
   function handleDeleteSelected() {
     if (selectedMessageCount > 0) onDeleteSelectedMessages();
@@ -77,14 +86,14 @@ export default function ToolbarComponent({
           Mark As Unread
         </button>
 
-        <select className="form-control label-select" disabled={`${disabled}`} onClick={handleOnApplyLabelSelectedMessages}>
+        <select className="form-control label-select" disabled={`${disabled}`} onChange={handleOnApplyLabelSelectedMessages}>
           <option>Apply label</option>
           <option value="dev">dev</option>
           <option value="personal">personal</option>
           <option value="gschool">gschool</option>
         </select>
 
-        <select className="form-control label-select" disabled={`${disabled}`} onClick={handleAllRemoveLabel}>
+        <select className="form-control label-select" disabled={`${disabled}`} onChange={handleAllRemoveLabel}>
           <option>Remove label</option>
           <option value="dev">dev</option>
           <option value="personal">personal</option>

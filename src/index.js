@@ -6,23 +6,23 @@ import InboxPage from './components/InboxPage';
 let messages = [
   {
     id: 1,
-    subject: "connecting the system won't do anything, we need to input the mobile AI panel!",
+    subject: 'Nigerian Prince, will pay many monies to you if helping',
     read: false,
     starred: false,
     labels: [],
-    body: `<div>example body text</div>`
+    body: 'I am nigerian prince. Please to give me your bank account info.'
   },
   {
     id: 2,
-    subject: 'Use the 1080p HTTP feed, then you can parse the cross-platform hard drive!',
+    subject: 'Viagra!!!!',
     read: false,
     starred: true,
     labels: ['dev'],
-    body: 'example body text'
+    body: 'Spam. Totally spam'
   },
   {
     id: 3,
-    subject: 'We need to program the primary TCP hard drive!',
+    subject: '10 weird tips for building muscles that doctors dont want you to know',
     read: true,
     starred: false,
     labels: [],
@@ -30,35 +30,35 @@ let messages = [
   },
   {
     id: 4,
-    subject: 'If we override the interface, we can get to the HTTP feed through the virtual EXE interface!',
+    subject: 'Personal trainers hate him',
     read: false,
     starred: false,
     labels: ['personal'],
-    body: 'example body text'
+    body: 'Hint: He takes steroids'
   },
   {
     id: 5,
-    subject: 'We need to back up the wireless GB driver!',
+    subject: 'Son, please answer my phone calls',
     read: true,
     starred: true,
     labels: [],
-    body: 'example body text'
+    body: 'You are making your mother sad :('
   },
   {
     id: 6,
-    subject: 'We need to index the mobile PCI bus!',
+    subject: 'Just Pho You: Where to Eat SF’s Best Pho',
     read: true,
     starred: false,
     labels: ['dev', 'personal'],
-    body: 'example body text'
+    body: 'Great restaurants near you'
   },
   {
     id: 7,
-    subject: 'If we connect the sensor, we can get to the HDD port through the redundant IB firewall!',
+    subject: 'Regarding your recent purchase of hair loss cream...',
     read: true,
     starred: true,
     labels: [],
-    body: 'example body text'
+    body: 'hah! You bald sucker!'
   }
 ];
 
@@ -115,17 +115,18 @@ function onOpenComposeForm() {
 }
 
 function onMarkAsReadSelectedMessages() {
-  if (selectedMessageIds.length > 0) {
-    let selectedMessages = messages.filter(message => selectedMessageIds.includes(message.id));
-    selectedMessages.forEach(message => message.read == true);
-  }
+  messages.forEach(message => {
+    if (selectedMessageIds.includes(message.id)) {
+      message.read = true;
+    }
+  });
   render();
 }
 
 function onMarkAsUnreadSelectedMessages() {
   if (selectedMessageIds.length > 0) {
     let selectedMessages = messages.filter(message => selectedMessageIds.includes(message.id));
-    selectedMessages.forEach(message => message.read == false);
+    selectedMessages.forEach(message => message.read === false);
   }
   render();
 }
@@ -153,11 +154,14 @@ function onRemoveLabelSelectedMessages(label) {
 }
 
 function onDeleteSelectedMessages() {
-  messages.forEach(message => {
-    if (selectedMessageIds.includes(message.id)) {
-      messages.splice(messages.indexOf(), 1);
-    }
-  });
+  if (selectedMessageIds.length > 0) {
+    let deleted = [];
+    messages.forEach((message, index) => {
+      if (selectedMessageIds.includes(message.id)) deleted.push(index);
+    });
+    deleted = deleted.sort().reverse();
+    deleted.forEach(a => messages.splice(a, 1));
+  }
   render();
 }
 
