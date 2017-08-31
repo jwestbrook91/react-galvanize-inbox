@@ -178,7 +178,7 @@ function onSubmit(subject, body) {
   newMessage.id = messages[messages.length - 1].id + 1;
   newMessage.subject = subject;
   newMessage.body = body;
-  messages.push(newMessage);
+  messages.unshift(newMessage);
   showComposeForm = false;
   render();
 }
