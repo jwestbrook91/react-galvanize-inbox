@@ -31,7 +31,7 @@ export default class MessageComponent extends React.Component {
 
   render() {
     if (!this.props.message) {
-      return <h4>"No Messages"</h4>;
+      return <h2>"No Messages"</h2>;
     }
     let readStatus = '';
     if (this.props.message.read === false) {
