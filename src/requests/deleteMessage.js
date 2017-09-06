@@ -1,5 +1,5 @@
 export default function deleteMessage(messageId) {
-  return fetch(`https://api.airtable.com/v0/appB41kaH02fQouxt/Table%201/${messageId}`, {
+  return fetch(`https://api.airtable.com/v0/appB41kaH02fQouxt/Messages/${messageId}`, {
     method: 'DELETE',
     headers: {
       Authorization: 'Bearer key7xuxEaJfKu00Al',

@@ -23,7 +23,7 @@ export default function updateMessage(messageId, type, labels = [], label) {
       break;
   }
 
-  return fetch(`https://api.airtable.com/v0/appB41kaH02fQouxt/Table%201/${messageId}`, {
+  return fetch(`https://api.airtable.com/v0/appB41kaH02fQouxt/Messages/${messageId}`, {
     method: 'PATCH',
     headers: {
       Authorization: 'Bearer key7xuxEaJfKu00Al',

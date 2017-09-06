@@ -1,5 +1,5 @@
 export default function createMessage(newMessage) {
-  return fetch(`https://api.airtable.com/v0/appB41kaH02fQouxt/Table%201`, {
+  return fetch(`https://api.airtable.com/v0/appB41kaH02fQouxt/Messages`, {
     method: 'POST',
     headers: {
       Authorization: 'Bearer key7xuxEaJfKu00Al',
